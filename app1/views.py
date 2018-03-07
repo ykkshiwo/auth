@@ -42,6 +42,10 @@ def logout_(request):
     return HttpResponse("已经退出")
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/cant')
 def are_you_login(request):
     return render(request, 'index.html')
+
+
+def cant(request):
+    return render(request, 'cant.html')

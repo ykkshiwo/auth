@@ -3,9 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="http://cdn.static.runoob.com/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+$(document).ready(function(){
+	$("#exit").click(function(){
+		$.ajax({
+		    url:"{% url 'app1:logout' %}",
+		    success:function(result){
+			    $("#test1").text("Goodbye man!");
+			    alert(result);
+		    }
+		});
+	});
+});
+
+    </script>
 </head>
 <body>
-Hello, man
-<a href="{% url 'app1:logout' %}"><input type="button" value="登出"></a>
+<h1 id="test1">Hello, man</h1>
+<input type="button" value="登出" id="exit">
 </body>
 </html>

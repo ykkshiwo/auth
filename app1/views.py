@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
+import os
 # Create your views here.
 
 
@@ -49,3 +50,16 @@ def are_you_login(request):
 
 def cant(request):
     return render(request, 'cant.html')
+
+
+@login_required(login_url='/cant')
+def upload(request):
+    if request.method == 'POST':
+        obj = request.FILES.get('pictures')
+        f = open(os.path.join('D:/upload', obj.name), 'wb')
+        for line in obj.chunks():
+            f.write(line)
+        f.close()
+        return HttpResponse('上传成功')
+    else:
+        return render(request, 'upload.html')
